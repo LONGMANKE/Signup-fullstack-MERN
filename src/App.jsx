@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css"
+import axios from 'axios';
 class App extends Component {
   constructor(){
     super()
@@ -7,8 +8,13 @@ class App extends Component {
       fullName:'',
       username:'',
       email:'',
-      password:'',
+      password:''
     }
+    this.changeFullName =this.changeFullName.bind(this)
+    this.changeEmail =this.changeEmail.bind(this)
+    this.changeUsername =this.changeUsername.bind(this)
+    this.changePassword=this.changePassword.bind(this)
+    this.onSubmit= this.onSubmit.bind(this)
   }
 
   changeFullName(event){
@@ -16,9 +22,9 @@ class App extends Component {
       fullName:event.target.value
     })
   }
-  changeFUsername(event){
+  changeUsername(event){
     this.setState({
-      fusername:event.target.value
+      username:event.target.value
     })
   }
   changeEmail(event){
@@ -31,34 +37,53 @@ class App extends Component {
       password:event.target.value
     })
   }
+onSubmit(event){
+  event.preventDefault()
 
+  const registered = {
+    fullName: this.state.fullName,
+    username: this.username,
+    email: this.email,
+    password: this.password,
+  }
+  axios.post('http://localhost:4000/app/signup', registered)
+  .then(response => console.log(response.data))
+
+  //window.ocation ='/'
+  this.setState({
+    fullName:'',
+    username:'',
+    email:'',
+    password:''
+  })
+}
 
   render() {
     return(
       <div className='container'>
         <div className='form-div'>
-          <form>
+          <form onSubmit={this.onSubmit}>
             <input type ='text'
             placeholder='Full Name'
-            onCharger={this.changeFullName}
+            onChange={this.changeFullName}
             value={this.state.fullName}
             className='form-control form-group'
             />
             <input type ='text'
-            placeholder='Fusername'
-              onCharger={this.changeFUsername}
-              value={this.state.fusername}
+            placeholder='username'
+              onChange={this.changeUsername}
+              value={this.state.username}
             className='form-control form-group'
             />
             <input type ='text'
             placeholder='E-mail'
-              onCharger={this.changeEmail}
+              onChange={this.changeEmail}
               value={this.state.email}
             className='form-control form-group'
             />
             <input type ='password'
             placeholder='password'
-            onCharger={this.changePassword}
+            onChange={this.changePassword}
             value={this.state.password}
             className='form-control form-group'
             />
@@ -74,4 +99,4 @@ class App extends Component {
   }
 }
  
-export default App;
+export default App; 
