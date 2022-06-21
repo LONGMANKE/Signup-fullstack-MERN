@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/LONGMANKE/Waste-collection-management-system#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "env": "^0.0.2",

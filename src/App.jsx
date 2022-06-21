@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
+
 class App extends Component {
   constructor(){
     super()
-    this.state ={
+    this.state = { 
       fullName:'',
       username:'',
       email:'',
@@ -38,18 +39,18 @@ class App extends Component {
     })
   }
 onSubmit(event){
-  event.preventDefault()
+  event.preventDefault()   
 
   const registered = {
     fullName: this.state.fullName,
     username: this.username,
     email: this.email,
-    password: this.password,
+    password: this.password
   }
   axios.post('http://localhost:4000/app/signup', registered)
   .then(response => console.log(response.data))
 
-  //window.ocation ='/'
+ 
   this.setState({
     fullName:'',
     username:'',
@@ -60,7 +61,8 @@ onSubmit(event){
 
   render() {
     return(
-      <div className='container'>
+      <div>
+         <div className='container'>
         <div className='form-div'>
           <form onSubmit={this.onSubmit}>
             <input type ='text'
@@ -70,7 +72,7 @@ onSubmit(event){
             className='form-control form-group'
             />
             <input type ='text'
-            placeholder='username'
+            placeholder='Username'
               onChange={this.changeUsername}
               value={this.state.username}
             className='form-control form-group'
@@ -82,7 +84,7 @@ onSubmit(event){
             className='form-control form-group'
             />
             <input type ='password'
-            placeholder='password'
+            placeholder='Password'
             onChange={this.changePassword}
             value={this.state.password}
             className='form-control form-group'
@@ -93,9 +95,9 @@ onSubmit(event){
           </form>
        
        </div>
-
+       </div>
       </div>
-    )
+    );
   }
 }
  
